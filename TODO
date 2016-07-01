@@ -1,0 +1,20 @@
+### TODO ###
+
+-> ensure that computed field not compute in list views, only when input datas... 
+-> Rental price have to show a dollar sign
+-> Rental Packs
+-> In Product view, user do not have write rights
+-> Delete a reservation should delete all the corresponding group_products
+-> Duplicate (in reservation form view) doesn't works. 
+-> The calendar view must show reservations names
+-> Front-end developpement :p
+
+
+### DONE ###
+
+-> Display only "Can be rent" products in reservation form
+-> Clean the views
+-> Change menu names
+-> Rewrite code with API's field access recommends (partially done)
+-> rewrite code partially considering OCA guidelines conventions : https://github.com/OCA/maintainer-tools/blob/master/CONTRIBUTING.md#field
+-> Class Product have to have the corresponding reservations

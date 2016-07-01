@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+	<data>
+
+        <!-- reservation form view -->
+        <record model="ir.ui.view" id="reservation_form_view">
+            <field name="name">reservation.form</field>
+            <field name="model">hoc.reservation</field>
+            <field name="arch" type="xml">
+                <form string="Reservation Form">
+                    <sheet>
+                        <group>
+                            <field name="description"/>
+			    <field name="reservation_type" />
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="group_product_ids" widget='one2many'/>
+			    <!--<field name="product_ids" />-->
+                            <field name="user_id"/>
+                        </group>
+                    </sheet>
+	    </form>
+            </field>
+    </record>
+        <!-- group product form view -->
+        <record model="ir.ui.view" id="nbr_product_form_view">
+            <field name="name">nbr_product.form</field>
+            <field name="model">hoc.nbr_products</field>
+            <field name="arch" type="xml">
+                <form string="Quantity Product Form">
+                    <sheet>
+                        <group>
+                            <field name="product_id"/>
+			    <field name="quantity" />
+                        </group>
+                    </sheet>
+	    </form>
+            </field>
+    </record>
+ 
+<!-- group product list view -->
+        <record model="ir.ui.view" id="nbr_product_list_view">
+            <field name="name">nbr_product.list</field>
+            <field name="model">hoc.nbr_products</field>
+            <field name="arch" type="xml">
+ 
+		<tree string = "List products and quantity" editable="bottom">
+		    	<!--<field name="id"/>-->
+			<field name="name" />
+			<field name="product_id" domain="[('rentable','=',True)]" />
+			<field name="quantity" />
+		    	<!--<field name="reservation_id" />-->
+			<field name="price" />
+		</tree>
+		</field>
+</record>
+
+	<!-- reservation tree view -->
+        <record model="ir.ui.view" id="reservation_tree_view">
+            <field name="name">reservation.tree</field>
+            <field name="model">hoc.reservation</field>
+            <field name="arch" type="xml">
+                <tree string="Reservation Tree">
+			    <field name="id"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="group_product_ids"/>
+			    <field name="user_id"/>
+			    <field name="days" />
+			    <field name="price" />
+	    </tree>
+            </field>
+    </record>
+
+    <!-- reservation calendar view -->
+        <record model="ir.ui.view" id="reservation_calendar_view">
+            <field name="name">reservation.calendar</field>
+            <field name="model">hoc.reservation</field>
+            <field name="arch" type="xml">
+		    <calendar string="Reservation Calendar" 
+			    date_start="start_date"
+			    date_stop="end_date"
+			    color="product_ids"
+			    display="[product_ids] - [user_id]">
+                            <!--<field name="group_product_ids"/>-->
+			    <field name="user_id"/>
+			    <field name="product_ids" />
+	    </calendar>
+            </field>
+    </record>
+       
+
+        <record model="ir.actions.act_window" id="reservations_list_action">
+            <field name="name">Reservation</field>
+            <field name="res_model">hoc.reservation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+        </record>
+        <record model="ir.actions.act_window" id="gr_list_action">
+            <field name="name">GR</field>
+            <field name="res_model">hoc.nbr_products</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+	<menuitem id="main_rent_menu" name="Rental" />
+	<menuitem id="rent_menu" name="Produits" parent="main_rent_menu" />
+	<menuitem id="rent_core" name="Rental" parent="main_rent_menu" />
+	<menuitem id="rent_reservations" name="Reservations" parent="rent_core" action="reservations_list_action" />
+	<menuitem id="nbr_products" name="Group_product" parent="rent_core" action="gr_list_action" />
+
+    </data>
+</openerp>

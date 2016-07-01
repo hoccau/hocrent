@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <openerp>
+    <data>
+        <!-- Add rental tab to existing product view -->
+        <record model="ir.ui.view" id="product_rent_form_view">
+            <field name="name">product.rentable</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Rental">
+                        <group>
+				<field name="rentable" />
+				<field name="rental_price_by_day" />
+				<field name="rental_discount_offset" />
+				<field name="rental_discount_amount" />
+				<!--<field name="group_product_ids"/>-->
+				<field name="reservation_ids" />
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+    </record>
+
+<record model="ir.actions.act_window" id="change_product">
+    <field name="name">Products</field>
+    <field name="res_model">product.product</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+	<menuitem id="products_menu" name="product" parent="rent_menu" action="change_product" />
+ 
+
+   </data>
+</openerp>
+
+

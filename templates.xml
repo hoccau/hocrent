@@ -1,0 +1,16 @@
+<openerp>
+    <data>
+     <template id="index">
+            <t t-call="website.layout">
+                <t t-set="title">Location</t>
+                <div class="oe_structure">
+                    <div class="container">
+                        <t t-foreach="period" t-as="p">
+                            <p><t t-esc="p.start_date"/> <t t-esc="p.end_date"/></p>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </template>
+   </data>
+</openerp>
